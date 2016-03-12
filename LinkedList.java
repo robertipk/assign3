@@ -25,13 +25,14 @@ public class LinkedList {
 				while(numLeftToSell>0 && !isEmpty()){
 					if (accessLastLink() != null){
 						numLeftToSell = accessLastLink().decreaseQuantity(numLeftToSell);
-						if (numLeftToSell != 0){
+						if(accessLastLink().getQuantity()==0)
 							removeLast();
-						}
+
 					}
 				}
+	
 				if(isEmpty()&&numLeftToSell>0)
-					System.out.println("Remainder of " + numLeftToSell + " widgets not availabel");
+					System.out.println("Remainder of " + numLeftToSell + " widgets not availabe.");
 				else
 					System.out.println(original + " widgets sold!");
 					
@@ -71,7 +72,7 @@ public class LinkedList {
 	}
 	
 	public void removeLast(){
-		
+		System.out.println("Removing node");
 		Link last = this.firstLink.next;
 		Link nextToLast = this.firstLink;
 		if (this.firstLink.next ==null)
