@@ -7,12 +7,16 @@ public class Link {
 	public Link next;
 	
 	public Link(int number, double cost){
-		price = cost * 1.3; //30% mark-up
-		quantity = number;
+		this.price = cost * 1.3; //30% mark-up
+		this.quantity = number;
 	}
 	
 	public int getQuantity() {
 		return quantity;
+	}
+	
+	public void decreaseQuantity(int num) {
+		this.quantity -= num;
 	}
 
 	public void setQuantity(int quantity) {

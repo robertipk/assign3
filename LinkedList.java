@@ -17,6 +17,21 @@ public class LinkedList {
 		firstLink = newLink;
 	}
 	
+	public void makeSale(String number,int promotion, double discount){
+		int num = Integer.parseInt(number);
+		Boolean completed = false; //flag set to true if there is enough inventory in the link to finish the sale
+		if (promotion>0) { //there is a promotion active
+	
+		}
+		if (num <= numItems()){
+			System.out.println("There is enough");
+			accessFirstLink().decreaseQuantity(num);
+			System.out.println(num + " widgets sold for " + num*accessFirstLink().getPrice());	
+		}
+		else{
+			System.out.println("There is not enough to make this sale");
+		}
+	}
 	public void addInventory(String number, String cost){
 		int num = Integer.parseInt(number);
 		double itemCost = Double.parseDouble(cost);
@@ -25,10 +40,18 @@ public class LinkedList {
 		firstLink = newLink;
 	}
 	
+	public Link accessFirstLink(){
+		return this.firstLink;
+	}
+	
+	public int numItems(){
+		return this.firstLink.getQuantity();
+	}
+	
 	public Link removeFirst(){
-		Link linkReference = firstLink;
+		Link linkReference = this.firstLink;
 		if(!isEmpty()){
-			firstLink = firstLink.next;
+			this.firstLink = this.firstLink.next;
 		}
 		else{
 			System.out.println("This linked list is empty");

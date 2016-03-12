@@ -3,42 +3,34 @@ package hwthree;
 import java.io.*;
 
 
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
-
-
-
 public class Transactions {
-	
+	public static int promotion = 0;
+	public static double discount;
 	
 	public static void processLine(LinkedList list, String[]text ){
-		System.out.println(1 + " " + text[0] + " " + text[1]);
+		//String type = text[0];
+		System.out.println(text[0]);
 		if (text[0].equals("R")){
 			System.out.println("This was a restock");
-			list.addInventory(text[1],text[2]);
+			list.addInventory(text[1].replaceAll("\\s",""),text[2].replaceAll("\\s",""));
+			System.out.println("Added " + text[1] + " widgets at a price of " + text[2]);
 		}		
 		else if (text[0].equals("S")){
-			System.out.println("This was a SALE");
+			list.makeSale(text[1],promotion,discount);
+			System.out.println("Sold " + text[1] + " widgets!");
 			
 		}
 		else //if promotion{
-			System.out.println("This was a PROMOTION");
-			;
+			System.out.println("Promotion for " + text[1].replace("%", ""));
+			promotion = 2;
+			discount = Double.parseDouble(text[1].replace("%", ""))/100;
+			System.out.println(discount);
 	}
 	
 	public static void main(String[] args){
 		LinkedList inventory = new LinkedList();
-		Link one = new Link(34,56.7);
-		Link two = new Link(45,23.3);
-		Link three = new Link(12,34.7);
-		inventory.insertFirstLink(29, 45.3);
-		inventory.insertFirstLink(23, 45.9);
-		inventory.insertFirstLink(15, 45.9);
-		inventory.insertFirstLink(11, 65.9);
-		inventory.displayList();
+
+	
 		
 		try{
 			BufferedReader reader;
@@ -46,15 +38,17 @@ public class Transactions {
 			reader = new BufferedReader(file);			
 			      String thisLine, type;
 			      String [] text;
-				  thisLine = reader.readLine();	
 				  while ((thisLine = reader.readLine()) != null) {
-					 processLine(inventory,thisLine.split(" "));
+					 text = thisLine.split("\t");
+					 processLine(inventory,text);
 					 
 				  }
 		}
 		catch(IOException e){
 			   System.out.println("Error, could not open the file!");
-		   }				
+		   }
+		inventory.displayList();
+		
 	}
 
 }
