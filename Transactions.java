@@ -11,20 +11,22 @@ public class Transactions {
 		//String type = text[0];
 		System.out.println(text[0]);
 		if (text[0].equals("R")){
-			System.out.println("This was a restock");
 			list.addInventory(text[1].replaceAll("\\s",""),text[2].replaceAll("\\s",""));
 			System.out.println("Added " + text[1] + " widgets at a price of " + text[2]);
 		}		
 		else if (text[0].equals("S")){
 			list.makeSale(text[1],promotion,discount);
-			System.out.println("Sold " + text[1] + " widgets!");
+			//System.out.println("Sold " + text[1] + " widgets!");
+			promotion--;
 			
 		}
-		else //if promotion{
+		else //if promotion
+		{
 			System.out.println("Promotion for " + text[1].replace("%", ""));
 			promotion = 2;
 			discount = Double.parseDouble(text[1].replace("%", ""))/100;
 			System.out.println(discount);
+		}
 	}
 	
 	public static void main(String[] args){

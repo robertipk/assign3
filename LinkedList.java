@@ -18,19 +18,25 @@ public class LinkedList {
 	}
 	
 	public void makeSale(String number,int promotion, double discount){
-		int num = Integer.parseInt(number);
-		Boolean completed = false; //flag set to true if there is enough inventory in the link to finish the sale
-		if (promotion>0) { //there is a promotion active
-	
-		}
-		if (num <= numItems()){
-			System.out.println("There is enough");
-			accessFirstLink().decreaseQuantity(num);
-			System.out.println(num + " widgets sold for " + num*accessFirstLink().getPrice());	
-		}
-		else{
-			System.out.println("There is not enough to make this sale");
-		}
+		int numLeftToSell= Integer.parseInt(number);
+		int original = numLeftToSell;
+		//Boolean completed = false; //flag set to true if there is enough inventory in the link to finish the sale
+		//if (promotion>0) { //there is a promotion active
+				while(numLeftToSell>0 && !isEmpty()){
+					if (accessLastLink() != null){
+						numLeftToSell = accessLastLink().decreaseQuantity(numLeftToSell);
+						if (numLeftToSell != 0){
+							removeLast();
+						}
+					}
+				}
+				if(isEmpty()&&numLeftToSell>0)
+					System.out.println("Remainder of " + numLeftToSell + " widgets not availabel");
+				else
+					System.out.println(original + " widgets sold!");
+					
+		//}
+		
 	}
 	public void addInventory(String number, String cost){
 		int num = Integer.parseInt(number);
@@ -44,20 +50,41 @@ public class LinkedList {
 		return this.firstLink;
 	}
 	
+	public Link accessLastLink(){
+		Link x = this.firstLink;
+		while (x.next != null)
+			x = x.next;
+		return x;
+	}
+	
 	public int numItems(){
 		return this.firstLink.getQuantity();
 	}
 	
-	public Link removeFirst(){
-		Link linkReference = this.firstLink;
+	public void removeFirst(){
 		if(!isEmpty()){
 			this.firstLink = this.firstLink.next;
 		}
 		else{
 			System.out.println("This linked list is empty");
 		}
-		return linkReference;
 	}
+	
+	public void removeLast(){
+		
+		Link last = this.firstLink.next;
+		Link nextToLast = this.firstLink;
+		if (this.firstLink.next ==null)
+			this.firstLink = null;
+		else{
+			while(last.next!=null){
+				last = last.next;
+				nextToLast = nextToLast.next;
+			}
+			nextToLast.next = null;	
+		}
+		
+}
 	
 	public void displayList(){
 		Link theLink = firstLink;

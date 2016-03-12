@@ -15,8 +15,18 @@ public class Link {
 		return quantity;
 	}
 	
-	public void decreaseQuantity(int num) {
-		this.quantity -= num;
+	public int decreaseQuantity(int num) {
+		if(this.quantity >= num){
+			this.quantity -= num;
+			System.out.println(num + " widgets sold at a price of " + this.price + " :SALE FINISHED");
+			return 0;
+		}
+		else{
+			int numLeft = num-this.quantity;
+			System.out.println(this.quantity + " widgets sold at a price of " + this.price + " :SALE UNFINISHED");
+			this.quantity = 0;
+			return numLeft;
+		}
 	}
 
 	public void setQuantity(int quantity) {
