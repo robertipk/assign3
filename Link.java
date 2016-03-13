@@ -20,18 +20,18 @@ public class Link {
 		return quantity;
 	}
 	
-	public int decreaseQuantity(int num, Total amtSales) {
+	public int decreaseQuantity(int num, Total amtSales, double discount) {
 		if(this.quantity >= num){
 			this.quantity = this.quantity - num;
-			System.out.println(num + " at $" + this.price + " each    Sales:$" + num*this.price);
+			System.out.println(num + " at $" + this.price + " each    Sales:$" + num*this.price*discount);
 			System.out.println(this.quantity + " remaining");
 			amtSales.increase(num*this.price);
 			return 0;
 		}
 		else{
 			int numLeft = num-this.quantity;
-			System.out.println(this.quantity + " at $" + this.price + " each    Sales:$" + this.quantity*this.price);
-			amtSales.increase(this.quantity*this.price);
+			System.out.println(this.quantity + " at $" + this.price + " each    Sales:$" + this.quantity*this.price*discount);
+			amtSales.increase(this.quantity*this.price*discount);
 			this.quantity = 0;
 			return numLeft;
 		}

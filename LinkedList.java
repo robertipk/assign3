@@ -38,12 +38,20 @@ public class LinkedList {
 	}
 	
 	public void makeSale(String number,int promotion, double discount){
+		double discountVal;
+		if(promotion>0){
+			discountVal = 1-discount;
+			System.out.println("Promotion is in effect----------------------");
+		}
+		else
+			discountVal = 1;
+		
 		Total amtSales = new Total(0.00);
 		int numLeftToSell= Integer.parseInt(number);
 		int remaining;
 		int original = numLeftToSell;		
 			while(numLeftToSell>0 && !isEmpty()){
-					remaining = accessLastLink().decreaseQuantity(numLeftToSell, amtSales);
+					remaining = accessLastLink().decreaseQuantity(numLeftToSell, amtSales,discount);
 					numLeftToSell = remaining;
 					if(accessLastLink().getQuantity()==0){
 						System.out.println("Zero left in this inventory");
@@ -110,8 +118,7 @@ public class LinkedList {
 		while(theLink != null){
 			System.out.println(theLink.toString());
 			theLink = theLink.next;
-			System.out.println();
-			
+			System.out.println();			
 		}
 	}
 }
