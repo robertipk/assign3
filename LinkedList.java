@@ -1,6 +1,26 @@
 package hwthree;
 
 public class LinkedList {
+	
+	class Total{
+		
+		private double totalSales = 0;
+		
+		public void increase(double amt){
+			System.out.println("Increased by amt of " + amt);
+			this.totalSales += amt;
+		}
+		
+		public Total(double amt){
+			this.totalSales = amt;
+		}
+		
+		public double getAmt(){
+			return this.totalSales;
+		}
+		
+	}
+	
 	public Link firstLink;
 	
 	LinkedList(){
@@ -18,24 +38,25 @@ public class LinkedList {
 	}
 	
 	public void makeSale(String number,int promotion, double discount){
+		Total amtSales = new Total(0.00);
 		int numLeftToSell= Integer.parseInt(number);
 		int remaining;
-		int original = numLeftToSell;
+		int original = numLeftToSell;		
 			while(numLeftToSell>0 && !isEmpty()){
-				//if (accessLastLink() != null){
-					remaining = accessLastLink().decreaseQuantity(numLeftToSell);
+					remaining = accessLastLink().decreaseQuantity(numLeftToSell, amtSales);
 					numLeftToSell = remaining;
 					if(accessLastLink().getQuantity()==0){
 						System.out.println("Zero left in this inventory");
 						removeLast();
 					}
 				}
-			//}	
 			if(isEmpty()&&numLeftToSell>0)
 				System.out.println("Remainder of " + numLeftToSell + " widgets not availabe.");
 			else
-				System.out.println(original + " total widgets sold!");							
+				System.out.println(original + " total widgets sold!");
+		System.out.println("The total sold was: $" + amtSales.getAmt());
 	}
+	
 	public void addInventory(String number, String cost){
 		int num = Integer.parseInt(number);
 		double itemCost = Double.parseDouble(cost);
@@ -69,7 +90,6 @@ public class LinkedList {
 	}
 	
 	public void removeLast(){
-		System.out.println("Removing node");
 		Link last = this.firstLink.next;
 		Link nextToLast = this.firstLink;
 		if (this.firstLink.next ==null)

@@ -1,11 +1,14 @@
 package hwthree;
 
+import hwthree.LinkedList.Total;
+
 public class Link {
 	
 	public double price;
 	public int quantity;
 	public double purchasePrice;
 	public Link next;
+	public static double total = 0.00 ;
 	
 	public Link(int number, double cost){
 		this.price = cost * 1.3; //30% mark-up
@@ -17,16 +20,18 @@ public class Link {
 		return quantity;
 	}
 	
-	public int decreaseQuantity(int num) {
+	public int decreaseQuantity(int num, Total amtSales) {
 		if(this.quantity >= num){
 			this.quantity = this.quantity - num;
 			System.out.println(num + " at $" + this.price + " each    Sales:$" + num*this.price);
 			System.out.println(this.quantity + " remaining");
+			amtSales.increase(num*this.price);
 			return 0;
 		}
 		else{
 			int numLeft = num-this.quantity;
 			System.out.println(this.quantity + " at $" + this.price + " each    Sales:$" + this.quantity*this.price);
+			amtSales.increase(this.quantity*this.price);
 			this.quantity = 0;
 			return numLeft;
 		}
