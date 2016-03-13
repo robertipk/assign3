@@ -4,11 +4,13 @@ public class Link {
 	
 	public double price;
 	public int quantity;
+	public double purchasePrice;
 	public Link next;
 	
 	public Link(int number, double cost){
 		this.price = cost * 1.3; //30% mark-up
 		this.quantity = number;
+		this.purchasePrice = cost;
 	}
 	
 	public int getQuantity() {
@@ -17,13 +19,14 @@ public class Link {
 	
 	public int decreaseQuantity(int num) {
 		if(this.quantity >= num){
-			this.quantity -= num;
-			System.out.println(num + " widgets sold at a price of " + this.price + " :SALE FINISHED");
+			this.quantity = this.quantity - num;
+			System.out.println(num + " at $" + this.price + " each    Sales:$" + num*this.price);
+			System.out.println(this.quantity + " remaining");
 			return 0;
 		}
 		else{
 			int numLeft = num-this.quantity;
-			System.out.println(this.quantity + " widgets sold at a price of " + this.price + " :SALE UNFINISHED");
+			System.out.println(this.quantity + " at $" + this.price + " each    Sales:$" + this.quantity*this.price);
 			this.quantity = 0;
 			return numLeft;
 		}
@@ -42,16 +45,6 @@ public class Link {
 	}
 
 	public String toString() {
-		return "Link [price=" + price + ", quantity=" + quantity + "]";
+		return "Purchase price=$" + purchasePrice + ", quantity=" + quantity;
 	}
-
-
-
-
-
-	public static void main(String[] args){
-		
-	}
-	
-
 }
