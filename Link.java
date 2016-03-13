@@ -26,13 +26,12 @@ public class Link {
 		if(this.quantity >= num){
 			this.quantity = this.quantity - num;
 			System.out.println(num + " at " + fmt1.format(this.price) + " each    Sales:" + fmt1.format(num*this.price*discount));
-			System.out.println(this.quantity + " remaining");
-			amtSales.increase(num*this.price);
+			amtSales.increase(num*this.price*discount);
 			return 0;
 		}
 		else{
 			int numLeft = num-this.quantity;
-			System.out.println(this.quantity + " at " + this.price + " each    Sales:" + fmt1.format(this.quantity*this.price*discount));
+			System.out.println(this.quantity + " at " + fmt1.format(this.price) + " each    Sales:" + fmt1.format(this.quantity*this.price*discount));
 			amtSales.increase(this.quantity*this.price*discount);
 			this.quantity = 0;
 			return numLeft;

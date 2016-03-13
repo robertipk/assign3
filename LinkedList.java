@@ -37,10 +37,8 @@ public class LinkedList {
 	
 	public void makeSale(String number,int promotion, double discount){
 		double discountVal;
-		if(promotion>0){
+		if(promotion>0)
 			discountVal = 1-discount;
-			System.out.println("Promotion is in effect----------------------");
-		}
 		else
 			discountVal = 1;
 		
@@ -52,16 +50,16 @@ public class LinkedList {
 			while(numLeftToSell>0 && !isEmpty()){
 					remaining = accessLastLink().decreaseQuantity(numLeftToSell, amtSales,discountVal);
 					numLeftToSell = remaining;
-					if(accessLastLink().getQuantity()==0){
-						System.out.println("Zero left in this inventory");
+					if(accessLastLink().getQuantity()==0)
 						removeLast();
-					}
 				}
-			if(isEmpty()&&numLeftToSell>0)
-				System.out.println("Remainder of " + numLeftToSell + " widgets not availabe.");
-			else
+		if(isEmpty()&&numLeftToSell>0){
+			System.out.println("Remainder of " + numLeftToSell + " widgets not available.");
+			System.out.println(original-numLeftToSell + " total widgets sold.");
+		}
+		else
 				System.out.println(original + " total widgets sold!");
-		System.out.println("The total sold was: " + fmt1.format(amtSales.getAmt()) + "\n");
+		System.out.println("Total Sales: " + fmt1.format(amtSales.getAmt()) + "\n");
 	}
 	
 	public void addInventory(String number, String cost){
@@ -99,8 +97,7 @@ public class LinkedList {
 		Link theLink = firstLink;
 		while(theLink != null){
 			System.out.println(theLink.toString());
-			theLink = theLink.next;
-			System.out.println();			
+			theLink = theLink.next;		
 		}
 	}
 }

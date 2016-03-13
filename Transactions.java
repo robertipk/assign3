@@ -9,7 +9,7 @@ public class Transactions {
 	public static void processLine(LinkedList list, String[]text ){
 		if (text[0].equals("R")){
 			list.addInventory(text[1].replaceAll("\\s",""),text[2].replaceAll("\\s",""));
-			System.out.println("Received " + text[1] + " widgets at a price of $" + text[2] + " each");
+			System.out.println("Received " + text[1] + " widgets at a price of $" + text[2] + " each\n");
 		}		
 		else if (text[0].equals("S")){
 			list.makeSale(text[1],promotion,discount);
@@ -19,7 +19,7 @@ public class Transactions {
 		{
 			promotion = 2; //promotion is active for the next two customers 
 			discount = Double.parseDouble(text[1].replace("%", ""))/100;
-			System.out.println(discount);
+			System.out.println("Promotion of " + text[1] + " available for the next two customers\n");
 		}
 	}
 	
