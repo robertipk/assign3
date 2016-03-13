@@ -1,13 +1,12 @@
 package hwthree;
+import java.text.NumberFormat;
 
 public class LinkedList {
 	
-	class Total{
-		
+	class Total{	
 		private double totalSales = 0;
 		
 		public void increase(double amt){
-			System.out.println("Increased by amt of " + amt);
 			this.totalSales += amt;
 		}
 		
@@ -17,8 +16,7 @@ public class LinkedList {
 		
 		public double getAmt(){
 			return this.totalSales;
-		}
-		
+		}	
 	}
 	
 	public Link firstLink;
@@ -47,11 +45,12 @@ public class LinkedList {
 			discountVal = 1;
 		
 		Total amtSales = new Total(0.00);
+		NumberFormat fmt1 = NumberFormat.getCurrencyInstance();
 		int numLeftToSell= Integer.parseInt(number);
 		int remaining;
 		int original = numLeftToSell;		
 			while(numLeftToSell>0 && !isEmpty()){
-					remaining = accessLastLink().decreaseQuantity(numLeftToSell, amtSales,discount);
+					remaining = accessLastLink().decreaseQuantity(numLeftToSell, amtSales,discountVal);
 					numLeftToSell = remaining;
 					if(accessLastLink().getQuantity()==0){
 						System.out.println("Zero left in this inventory");
@@ -62,7 +61,7 @@ public class LinkedList {
 				System.out.println("Remainder of " + numLeftToSell + " widgets not availabe.");
 			else
 				System.out.println(original + " total widgets sold!");
-		System.out.println("The total sold was: $" + amtSales.getAmt());
+		System.out.println("The total sold was: " + fmt1.format(amtSales.getAmt()) + "\n");
 	}
 	
 	public void addInventory(String number, String cost){
@@ -73,28 +72,11 @@ public class LinkedList {
 		firstLink = newLink;
 	}
 	
-	public Link accessFirstLink(){
-		return this.firstLink;
-	}
-	
 	public Link accessLastLink(){
 		Link x = this.firstLink;
 		while (x.next != null)
 			x = x.next;
 		return x;
-	}
-	
-	public int numItems(){
-		return this.firstLink.getQuantity();
-	}
-	
-	public void removeFirst(){
-		if(!isEmpty()){
-			this.firstLink = this.firstLink.next;
-		}
-		else{
-			System.out.println("This linked list is empty");
-		}
 	}
 	
 	public void removeLast(){

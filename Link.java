@@ -1,6 +1,7 @@
 package hwthree;
-
 import hwthree.LinkedList.Total;
+import java.text.NumberFormat;
+
 
 public class Link {
 	
@@ -21,16 +22,17 @@ public class Link {
 	}
 	
 	public int decreaseQuantity(int num, Total amtSales, double discount) {
+		NumberFormat fmt1 = NumberFormat.getCurrencyInstance();
 		if(this.quantity >= num){
 			this.quantity = this.quantity - num;
-			System.out.println(num + " at $" + this.price + " each    Sales:$" + num*this.price*discount);
+			System.out.println(num + " at " + fmt1.format(this.price) + " each    Sales:" + fmt1.format(num*this.price*discount));
 			System.out.println(this.quantity + " remaining");
 			amtSales.increase(num*this.price);
 			return 0;
 		}
 		else{
 			int numLeft = num-this.quantity;
-			System.out.println(this.quantity + " at $" + this.price + " each    Sales:$" + this.quantity*this.price*discount);
+			System.out.println(this.quantity + " at " + this.price + " each    Sales:" + fmt1.format(this.quantity*this.price*discount));
 			amtSales.increase(this.quantity*this.price*discount);
 			this.quantity = 0;
 			return numLeft;
@@ -50,6 +52,7 @@ public class Link {
 	}
 
 	public String toString() {
-		return "Purchase price=$" + purchasePrice + ", quantity=" + quantity;
+		NumberFormat fmt1 = NumberFormat.getCurrencyInstance();
+		return "Purchase price=" + fmt1.format(purchasePrice) + ", quantity=" + quantity;
 	}
 }
